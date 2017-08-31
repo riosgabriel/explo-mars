@@ -2,6 +2,14 @@ defmodule Hover do
 
   defstruct x: 0, y: 0, direction: "N"
 
+  def execute_command(hover, command) do
+    case command do
+      "M" -> move(hover)
+      "R" -> rotate(hover, "R")
+      "L" -> rotate(hover, "L")
+    end
+  end
+
   def rotate(hover, "L") do
     case hover.direction do
       "N" -> %{hover | direction: "W"}
