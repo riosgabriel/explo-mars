@@ -2,13 +2,21 @@ defmodule ControlCenter do
 
   defstruct rovers: [], plateau: %Plateau{}
 
-  def init(args) do
-#    |> parse_args
-#    |> specify_plateau
-#    |> deploy_hover
-#    |> execute_commands
-#    |> display_current_location
+  def parse_component(control_center, {x, y}) do
+#    specify_plateau(control_center, x, y)
+    IO.puts "Plateau: (#{x}, #{y})"
   end
+
+  def parse_component(control_center, {x, y, direction}) do
+    IO.puts "Hover: (#{x}, #{y}, #{direction})"
+#    deploy_hover(control_center, %Rover{x: x, y: y, direction: direction})
+  end
+
+  def parse_component(commands) do
+    IO.puts "Commands: #{String.codepoints(commands)}"
+  end
+
+
 
   def specify_plateau(control_center, x, y) do
     %{control_center | plateau: %Plateau{max_x: x, max_y: y}}

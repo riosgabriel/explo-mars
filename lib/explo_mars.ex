@@ -1,26 +1,21 @@
 defmodule ExploMars do
 
   def main(args) do
+    {opts,_,_} = OptionParser.parse(args, switches: [file: :string], aliases: [f: :file])
 
-#    plateau = %{max_x: 5, max_y: 5}
-    hover1 = %Hover{x: 1, y: 2, direction: "N"}
-    commands1 = "LMLMLMLMM"
+    file_path = opts[:file]
 
-    result = Enum.reduce(String.codepoints(commands1), hover1, fn(c, h) -> Hover.execute_command(h, c) end)
-
-    IO.puts print(result)
-
-    hover2 = %Hover{x: 3, y: 3, direction: "E"}
-    commands2 = "MMRMMRMRRM"
-
-    result2 = Enum.reduce(String.codepoints(commands2), hover2, fn(c, h) -> Hover.execute_command(h, c) end)
-
-    IO.puts print(result2)
-
+    File.stream!(file_path)
+    |> Enum.each(fn(x) -> convert_to_tuple(x) end)
   end
 
-  def print(hover) do
-    "#{hover.x} #{hover.y} #{hover.direction}"
+  def convert_to_tuple(input, separator \\ " ") do
+    input
+    |> String.strip
+    |> String.split(separator)
+    |> Enum.map(&String.to_integer/1)
+    |> List.to_tuple
   end
+
 
 end
