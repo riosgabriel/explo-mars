@@ -7,6 +7,6 @@ defmodule ExploMars do
 
     control_center = InputParser.parse_input(File.stream!(file_path))
 
-#    ControlCenter.display_current_location(control_center.rovers)
+    ControlCenter.display_current_location(control_center.rovers)
   end
 end
