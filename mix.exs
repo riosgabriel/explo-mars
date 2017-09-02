@@ -6,7 +6,7 @@ defmodule ExploMars.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.1-dev",
      escript: [main_module: ExploMars],
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application

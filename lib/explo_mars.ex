@@ -5,6 +5,8 @@ defmodule ExploMars do
 
     file_path = opts[:file]
 
-    IO.inspect InputParser.parse_input(File.stream!(file_path))
+    control_center = InputParser.parse_input(File.stream!(file_path))
+
+#    ControlCenter.display_current_location(control_center.rovers)
   end
 end

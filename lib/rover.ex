@@ -2,7 +2,11 @@ defmodule Rover do
 
   defstruct x: 0, y: 0, direction: "N"
 
-  def execute_command(rover, command) do
+  def execute_commands(rover, commands) do
+    Enum.reduce(String.codepoints(commands), rover, fn(c, r) -> execute_command(r, c) end)
+  end
+
+  defp execute_command(rover, command) do
     case command do
       "M" -> move(rover)
       "R" -> rotate(rover, "R")

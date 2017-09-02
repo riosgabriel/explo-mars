@@ -8,7 +8,7 @@ defmodule InputParser do
 
   def convert_to_list(input, separator \\ " ") do
     input
-    |> String.strip
+    |> String.trim
     |> String.split(separator)
     |> Enum.map(&try_to_convert/1)
   end
