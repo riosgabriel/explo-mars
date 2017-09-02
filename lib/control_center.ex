@@ -2,33 +2,32 @@ defmodule ControlCenter do
 
   defstruct rovers: [], plateau: %Plateau{}
 
-  def parse_component(control_center, {x, y}) do
-#    specify_plateau(control_center, x, y)
-    IO.puts "Plateau: (#{x}, #{y})"
+  def parse_component([x, y], control_center) do
+    plateau = %Plateau{max_x: x, max_y: y}
+    specify_plateau(control_center, plateau)
   end
 
-  def parse_component(control_center, {x, y, direction}) do
-    IO.puts "Hover: (#{x}, #{y}, #{direction})"
-#    deploy_hover(control_center, %Rover{x: x, y: y, direction: direction})
+  def parse_component([x, y, direction], control_center) do
+    rover = %Rover{x: x, y: y, direction: direction}
+    deploy_hover(control_center, rover)
   end
 
-  def parse_component(commands) do
-    IO.puts "Commands: #{String.codepoints(commands)}"
+  def parse_component([commands], control_center) do
+    control_center
   end
 
-
-
-  def specify_plateau(control_center, x, y) do
-    %{control_center | plateau: %Plateau{max_x: x, max_y: y}}
+  def specify_plateau(control_center, plateau) do
+    %{control_center | plateau: plateau}
   end
 
   def deploy_hover(control_center, rover) do
-    %{control_center | rovers: [rover | control_center.hovers]}
+    %{control_center | rovers: [rover | control_center.rovers]}
   end
 
-  def execute_commands(commands, rovers, plateau) do
-
-  end
+#  def execute_commands(control_center, commands, rovers, plateau) do
+#    rovers
+#    |> Enum.map
+#  end
 
   def display_current_location(rovers) do
     Enum.map(rovers, fn(rover) -> "#{rover.x} #{rover.y} #{rover.direction}" end)
