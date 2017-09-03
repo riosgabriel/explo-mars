@@ -1,9 +1,7 @@
 defmodule InputParser do
 
   def parse_input(input) do
-    components = input |> Enum.map(&convert_to_list/1)
-
-    Enum.reduce(components, %ControlCenter{}, &ControlCenter.parse_component(&1, &2))
+    input |> Enum.map(&convert_to_list/1)
   end
 
   def convert_to_list(input, separator \\ " ") do

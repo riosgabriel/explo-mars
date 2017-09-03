@@ -11,6 +11,7 @@ defmodule Rover do
       "M" -> move(rover)
       "R" -> rotate(rover, "R")
       "L" -> rotate(rover, "L")
+      _ -> rover
     end
   end
 
@@ -20,6 +21,7 @@ defmodule Rover do
       "W" -> %{rover | direction: "S"}
       "E" -> %{rover | direction: "N"}
       "S" -> %{rover | direction: "E"}
+      _ -> rover
     end
   end
 
@@ -29,6 +31,7 @@ defmodule Rover do
       "W" -> %{rover | direction: "N"}
       "E" -> %{rover | direction: "S"}
       "S" -> %{rover | direction: "W"}
+      _ -> rover
     end
   end
 
@@ -38,6 +41,7 @@ defmodule Rover do
       "W" -> %{rover | x: rover.x - 1}
       "E" -> %{rover | x: rover.x + 1}
       "S" -> %{rover | y: rover.y - 1}
+      _ -> rover
     end
   end
 

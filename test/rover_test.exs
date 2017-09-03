@@ -1,6 +1,5 @@
 defmodule RoverTest do
   use ExUnit.Case
-  doctest ExploMars
 
   test "when rover was facing to North and the command was 'R' rotate to East" do
     rover = %Rover{x: 0, y: 0, direction: "N"}
@@ -49,11 +48,5 @@ defmodule RoverTest do
 
     assert 0 == result.x
   end
-  
-#  test "when send a wrong command to rover" do
-#    rover = %Rover{}
-#
-#    Rover.rotate(rover, "X")
-#  end
 
 end
