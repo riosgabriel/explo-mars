@@ -1,6 +1,6 @@
 defmodule ControlCenter do
 
-  defstruct current_rover: %Rover{}, plateau: %Plateau{}, rovers: [], errors: []
+  defstruct current_rover: :empty, plateau: %Plateau{}, rovers: [], errors: []
 
   def parse_component([x, y], control_center) do
     specify_plateau(%Plateau{max_x: x, max_y: y}, control_center)
@@ -28,10 +28,13 @@ defmodule ControlCenter do
   end
 
   defp execute_commands(commands, control_center) do
-    result = Rover.execute_commands(control_center.current_rover, commands)
-    case result do
-      {:error, reason} -> %{control_center | errors: [{:error, reason} | control_center.errors]}
-      _ -> %{control_center | rovers: [result | control_center.rovers]}
+    case control_center.current_rover do
+      :empty -> control_center
+      _ -> result = Rover.execute_commands(control_center.current_rover, commands)
+           case result do
+             {:error, reason} -> %{control_center | errors: [{:error, reason} | control_center.errors]}
+             _ -> %{control_center | rovers: [result | control_center.rovers]}
+           end
     end
   end
 
